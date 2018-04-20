@@ -73,6 +73,8 @@ export default class App extends React.Component {
           data={DATA}
           renderCard={this.renderCard}
           renderNoMoreCard={this.renderNoMoreCard}
+          //onSwipeRigth={}
+          //onSwipeLeft={}
         />
       </View>
     );

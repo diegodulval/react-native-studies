@@ -6,6 +6,11 @@ const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.25;
 const SWIPE_OUT_DURATION = 250;
 
 class Deck extends Component {
+  static defaultProps = {
+    onSwipeRight: () => {},
+    onSwipeLeft: () => {}
+  };
+
   constructor(props) {
     super(props);
 
@@ -26,29 +31,28 @@ class Deck extends Component {
       }
     });
 
-    this.state = { panResponder, position };
+    this.state = { panResponder, position, index: 0 };
   }
 
   forceSwip(direction) {
     const { position } = this.state;
     const ternal = direction === "right" ? SCREEN_WIDTH : -SCREEN_WIDTH;
     Animated.timing(position, {
-      toValue: {
-        x: ternal,
-        y: 0
-      },
+      toValue: { x: ternal, y: 0 },
       duration: SWIPE_OUT_DURATION
-    }).start();
+    }).start(() => this.onSwipeComplete(direction));
+  }
+
+  onSwipeComplete(direction) {
+    const { onSwipeLeft, onSwipeRight, data } = this.props;
+    const item = data[this.state.index];
+
+    direction === "right" ? onSwipeRight(item) : onSwipeLeft(item);
   }
 
   resetPosition() {
     const { position } = this.state;
-    Animated.spring(position, {
-      toValue: {
-        x: 0,
-        y: 0
-      }
-    }).start();
+    Animated.spring(position, { toValue: { x: 0, y: 0 } }).start();
   }
 
   getCardStyle() {
