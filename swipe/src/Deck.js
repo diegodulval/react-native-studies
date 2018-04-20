@@ -71,6 +71,10 @@ class Deck extends Component {
   }
 
   renderCards() {
+    if (this.state.index === this.props.data.length) {
+      return this.props.renderNoMoreCard();
+    }
+
     return this.props.data.map((item, i) => {
       if (i < this.state.index) {
         return null;
@@ -96,3 +100,21 @@ class Deck extends Component {
 }
 
 export default Deck;
+
+
+
+B:
+function myFilter(inputArray, extraElement) {
+
+  var result = [];
+  for (var i = 0; i < inputArray.length; i++) {
+    if (inputArray[i] === extraElement) {
+      continue;
+    }
+    result.push( inputArray[i] );
+  }
+
+  return result;
+}
+
+
