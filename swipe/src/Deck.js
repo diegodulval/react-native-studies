@@ -75,46 +75,44 @@ class Deck extends Component {
       return this.props.renderNoMoreCard();
     }
 
-    return this.props.data.map((item, i) => {
-      if (i < this.state.index) {
-        return null;
-      }
-      if (i === this.state.index) {
-        return (
-          <Animated.View
-            key={item.id}
-            style={this.getCardStyle()}
-            {...this.state.panResponder.panHandlers}
-          >
-            {this.props.renderCard(item)}
-          </Animated.View>
-        );
-      }
+    return this.props.data
+      .map((item, i) => {
+        if (i < this.state.index) {
+          return null;
+        }
+        if (i === this.state.index) {
+          return (
+            <Animated.View
+              key={item.id}
+              style={[this.getCardStyle(), styles.cardStyle]}
+              {...this.state.panResponder.panHandlers}
+            >
+              {this.props.renderCard(item)}
+            </Animated.View>
+          );
+        }
 
-      return this.props.renderCard(item);
-    });
+        return (
+          <View key={item.id} style={styles.cardStyle}>
+            {this.props.renderCard(item)}
+          </View>
+        );
+      })
+      .reverse();
   }
   render() {
     return <View>{this.renderCards()}</View>;
   }
 }
 
-export default Deck;
-
-
-
-B:
-function myFilter(inputArray, extraElement) {
-
-  var result = [];
-  for (var i = 0; i < inputArray.length; i++) {
-    if (inputArray[i] === extraElement) {
-      continue;
-    }
-    result.push( inputArray[i] );
+const styles = {
+  cardStyle: {
+    position: "absolute",
+    width: SCREEN_WIDTH,
+    //left: 0,
+    //right: 0
+    marginTop: 10
   }
+};
 
-  return result;
-}
-
-
+export default Deck;
