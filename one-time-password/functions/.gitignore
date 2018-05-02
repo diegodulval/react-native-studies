@@ -12,3 +12,4 @@ yarn-debug.log*
 yarn-error.log*
 
 service_account.json
+twilio.js
