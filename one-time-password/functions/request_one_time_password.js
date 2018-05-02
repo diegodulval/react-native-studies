@@ -19,13 +19,30 @@ module.exports = function(req, res) {
       const code = Math.floor(Math.random() * 8999 + 1000);
 
       //send message
-      twilio.messages.create({
-        body: "Your code is " + code,
-        to: phone,
-        from: "+12195129977"
-      });
+      twilio.messages.create(
+        {
+          body: "Your code is " + code,
+          to: phone,
+          from: "+12195129977"
+        },
+        err => {
+          if (err) {
+            return res.status(422).send(err);
+          }
+
+          //save code to user
+          admin
+            .database()
+            .ref("users/" + phone)
+            .update({ code: code, codeValid: true }, () => {
+              res.send({ success: true });
+            });
+        }
+      );
+
+      //return null;
     })
-    .catch(err => res.status(422).send({ error: err }));
+    .catch(err => res.status(422).send(err));
 
   // Respond to the user request, saying the account was made
 };
