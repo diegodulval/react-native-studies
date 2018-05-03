@@ -22,7 +22,7 @@ module.exports = function(req, res) {
       twilio.messages.create(
         {
           body: "Your code is " + code,
-          to: phone,
+          to: "+" + phone,
           from: "+12195129977"
         },
         err => {
