@@ -15,7 +15,7 @@ module.exports = function(req, res) {
       const ref = admin.database().ref("users/" + phone);
       ref.on("value", snapshot => {
         const user = snapshot.val();
-
+        ref.off();
         //compare codes
         if (user.code !== code || !user.codeValid) {
           return res.status(422).send({ error: "Code not valid" });
