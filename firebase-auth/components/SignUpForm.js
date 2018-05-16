@@ -4,6 +4,8 @@ import { FormLabel, FormInput, Button } from "react-native-elements";
 import axios from "axios";
 
 class SignUpForm extends Component {
+  state = { phone: "" };
+
   render() {
     return (
       <View>
