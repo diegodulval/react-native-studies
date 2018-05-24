@@ -1,9 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import firebase from "firebase";
+
 import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
 
 export default class App extends React.Component {
+  componentDidMount() {
+    const config = {
+      apiKey: "",
+      authDomain: "",
+      databaseURL: "",
+      projectId: "one-time-react",
+      storageBucket: "",
+      messagingSenderId: ""
+    };
+    firebase.initializeApp(config);
+  }
+
   render() {
     return (
       <View style={styles.container}>
