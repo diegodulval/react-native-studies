@@ -14,7 +14,7 @@ class SignUpForm extends Component {
       await axios.post(`${ROOT_URL}/createUser`, user);
       await axios.post(`${ROOT_URL}/requestOneTimePassword`, user);
     } catch (err) {
-      console.log(err);
+      this.setState({ error: "Something went wrong!" });
     }
   };
 
