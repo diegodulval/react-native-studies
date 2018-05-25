@@ -1,13 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { createBottomTabNavigator } from "react-navigation";
 
-export default class App extends React.Component {
+import AuthScreen from "./screens/AuthScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
+
+class App extends React.Component {
   render() {
+    const MainNavigator = createBottomTabNavigator({
+      welcome: { screen: WelcomeScreen },
+      auth: { screen: AuthScreen }
+    });
+
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <MainNavigator />
       </View>
     );
   }
@@ -16,8 +23,10 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    //alignItems: "center",
+    justifyContent: "center"
+  }
 });
+
+export default App;
