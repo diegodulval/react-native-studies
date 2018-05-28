@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Platform } from "react-native";
 import { Button } from "react-native-elements";
 
 class ReviewScreen extends Component {
@@ -7,8 +7,16 @@ class ReviewScreen extends Component {
     const { navigate } = navigation;
     return {
       title: "Review Jobs",
+      headerStyle: {
+        marginTop: Platform.OS === "android" ? 25 : 0
+      },
       headerRight: (
-        <Button title="Settings" onPress={() => navigate("settings")} />
+        <Button
+          title="Settings"
+          onPress={() => navigate("settings")}
+          backgroundColor="rgba(0,0,0,0)"
+          color="rgba(0,122,255,1)"
+        />
       )
     };
   };
