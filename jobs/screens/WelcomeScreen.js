@@ -4,9 +4,9 @@ import { View, Text } from "react-native";
 import Slides from "../components/Slides";
 
 const SLIDE_DATA = [
-  { text: "Welcome to JobApp" },
-  { text: "Set yout location, then swipe away" },
-  { text: "Job Finder will help you get a job!" }
+  { id: 1, color: "#03A9F4", text: "Welcome to JobApp" },
+  { id: 2, color: "#009688", text: "Set yout location, then swipe away" },
+  { id: 3, color: "#03A9F4", text: "Job Finder will help you get a job!" }
 ];
 
 class WelcomeScreen extends Component {
