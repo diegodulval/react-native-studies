@@ -8,7 +8,7 @@ class ReviewScreen extends Component {
     return {
       title: "Review Jobs",
       headerStyle: {
-        marginTop: Platform.OS === "android" ? 25 : 0
+        //marginTop: Platform.OS === "android" ? 25 : 0
       },
       headerRight: (
         <Button
