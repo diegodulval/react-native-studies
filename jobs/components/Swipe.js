@@ -91,40 +91,42 @@ class Swipe extends Component {
 
   renderCards() {
     if (this.state.index >= this.props.data.length) {
-      return this.props.renderNoMoreCard();
+      return this.props.renderNoMoreCards();
     }
 
-    return this.props.data
-      .map((item, i) => {
-        if (i < this.state.index) {
-          return null;
-        }
-        if (i === this.state.index) {
-          return (
-            <Animated.View
-              key={item.id}
-              style={[this.getCardStyle(), styles.cardStyle, { zIndex: 99 }]}
-              {...this.state.panResponder.panHandlers}
-            >
-              {this.props.renderCard(item)}
-            </Animated.View>
-          );
-        }
-
+    const deck = this.props.data.map((item, i) => {
+      if (i < this.state.index) {
+        return null;
+      }
+      if (i === this.state.index) {
         return (
           <Animated.View
             key={item.id}
-            style={[
-              styles.cardStyle,
-              { top: 10 * (i - this.state.index) },
-              { zIndex: 5 }
-            ]}
+            style={[this.getCardStyle(), styles.cardStyle, { zIndex: 99 }]}
+            {...this.state.panResponder.panHandlers}
           >
             {this.props.renderCard(item)}
           </Animated.View>
         );
-      })
-      .reverse();
+      }
+
+      return (
+        <Animated.View
+          key={item.id}
+          style={[
+            styles.cardStyle,
+            {
+              top: 10 * (i - this.state.index),
+              zIndex: -i
+            }
+          ]}
+        >
+          {this.props.renderCard(item)}
+        </Animated.View>
+      );
+    });
+
+    return deck.reverse();
   }
   render() {
     return <View>{this.renderCards()}</View>;
